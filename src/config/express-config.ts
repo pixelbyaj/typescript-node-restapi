@@ -36,10 +36,6 @@ class ExpressConfig extends PassportConfig {
         this.app.use(func);
     }
 
-    public httpPost(route: string, func: (request: express.Request, response: express.Response, next: () => any) => void) {
-
-    }
-
     public listen(func: () => void): boolean {
         if (this.app) {
             this.app.listen(this.app.get("port"), func);
