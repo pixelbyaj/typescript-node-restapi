@@ -8,12 +8,14 @@ import * as _ from "lodash";
 import { User,UserModel,AuthToken } from "../login/LoginModel";
 const request = require("express-validator");
 
-/**
+
+
+class LoginControl {
+
+    /**
  * POST /signup
  * Create a new local account.
  */
-
-class LoginControl {
     public postSignup(req: Request, res: Response, next: NextFunction) {
         req.assert("email", "Email is not valid").isEmail();
         req.assert("password", "Password must be at least 4 characters long").len(4);
@@ -51,6 +53,10 @@ class LoginControl {
         });
     };
 
+    /**
+ * POST /login
+ * Create a new local account.
+ */
     public postLogin(req: Request, res: Response, next: NextFunction) {
         req.assert("email", "Email is not valid").isEmail();
         req.assert("password", "Password cannot be blank").notEmpty();

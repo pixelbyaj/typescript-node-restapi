@@ -2,7 +2,7 @@ import * as bcrypt from "bcrypt-nodejs";
 import * as crypto from "crypto";
 import * as mongoose from "mongoose";
 
-interface UserModel extends mongoose.Document{
+interface UserModel extends mongoose.Document {
   email: string;
   password: string;
   passwordResetToken: string;
@@ -12,18 +12,19 @@ interface UserModel extends mongoose.Document{
   comparePassword: (candidatePassword: string, cb: (err: any, isMatch: any) => {}) => void;
 }
 
-interface AuthToken{
+interface AuthToken {
   accessToken: string;
   kind: string
 }
 
-class UserSchema{
-  private readonly userSchema:mongoose.Schema;
+class LoginSchema {
+  private readonly loginSchema: mongoose.Schema;
+  private readonly COLLECTION = "Users";
   /**
    *
    */
   constructor() {
-    this.userSchema = new mongoose.Schema({
+    this.loginSchema = new mongoose.Schema({
       email: { type: String, unique: true },
       password: String,
       passwordResetToken: String,
@@ -36,12 +37,12 @@ class UserSchema{
     this.setPasswordHash();
     this.setComparePassword();
   }
-  
+
   /**
   * Password hash middleware.
   */
-  private setPasswordHash(){
-    this.userSchema.pre("save", function save(next) {
+  private setPasswordHash() {
+    this.loginSchema.pre("save", function save(next) {
       let user = this;
       if (!user.isModified("password")) { return next(); }
       bcrypt.genSalt(10, (err, salt) => {
@@ -56,18 +57,18 @@ class UserSchema{
   }
 
 
-  private setComparePassword(){
-    this.userSchema.methods.comparePassword = 
-    function(candidatePassword: string, cb: (err: any, isMatch: any) => {}) {
-      bcrypt.compare(candidatePassword, this.password, (err: mongoose.Error , isMatch: boolean) => {
-      cb(err, isMatch);
-    });
+  private setComparePassword() {
+    this.loginSchema.methods.comparePassword =
+      function (candidatePassword: string, cb: (err: any, isMatch: any) => {}) {
+        bcrypt.compare(candidatePassword, this.password, (err: mongoose.Error, isMatch: boolean) => {
+          cb(err, isMatch);
+        });
+      }
   }
-  }
-  public getUserSchema():mongoose.Model<mongoose.Document>{
-    return mongoose.model("User", this.userSchema);
+  public getUserSchema(): mongoose.Model<mongoose.Document> {
+    return mongoose.model("User", this.loginSchema,this.COLLECTION);
   }
 }
-const userSchema = (new UserSchema()).getUserSchema();
+const userSchema = (new LoginSchema()).getUserSchema();
 
-export {userSchema as User,UserModel,AuthToken};
+export { userSchema as User, UserModel, AuthToken };
