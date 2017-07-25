@@ -18,7 +18,6 @@ interface UserProfileModel extends mongoose.Document {
     contactno: string[];
     socialprofiles: { facebook: string, twitter: string, instagram: string }
 }
-
 class UserProfileModel {
     private readonly userProfileSchema: mongoose.Schema;
     private COLLECTION = "UserProfile";
