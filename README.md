@@ -28,7 +28,7 @@ npm start
 ```
 Navigate to `http://localhost:3000`
 
-# TypeScript + Node 
+# MENT 
 The main purpose of this repository is to show a good REST API project setup and workflow for writing Node code in TypeScript with bit flavor of Object Oriented Programming.
 I will try to keep this as up-to-date as possible, but community contributions and recommendations for improvements are encouraged and will be most welcome. 
 
