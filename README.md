@@ -11,7 +11,7 @@ Rest API using Node and TypeScript
 # Getting started
 - Clone the repository
 ```
-git clone --depth=1 https://github.com/joshiabk/node-restapi.git <project_name>
+git clone --depth=1 https://github.com/joshiabk/typescript-node-restapi.git <project_name>
 ```
 - Install dependencies
 ```
