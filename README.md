@@ -47,4 +47,25 @@ If you're using VS Code then you're good to go!
 VS Code will detect and use the TypeScript version you have installed in your `node_modules` folder. 
 For other editors, make sure you have the corresponding [TypeScript plugin](http://www.typescriptlang.org/index.html#download-links). 
 
+## Project Structure
+The most obvious difference in a MENT project is the folder structure.
+In a TypeScript project, it's best to have separate _source_  and _distributable_ files.
+TypeScript (`.ts`) files live in your `src` folder and after compilation are output as JavaScript (`.js`) in the `dist` folder.
+The `test` folders remain top level as expected. 
 
+The full folder structure of this app is explained below:
+
+> **Note!** Make sure you have already built the app using `npm run build`
+
+| Name | Description |
+| ------------------------ | --------------------------------------------------------------------------------------------- |
+| **.vscode**              | Contains VS Code specific settings                                                            |
+| **dist**                 | Contains the distributable (or output) from your TypeScript build. This is the code you ship  |
+| **node_modules**         | Contains all your npm dependencies                                                            |
+| **src**                  | Contains your source code that will be compiled to the dist dir                               |
+| **src/config**           | Express,Mongo,Passport,Route config class declared and it also has passport strategies and authentication strategies and login middleware. Add other complex config code here                                                        | 
+| **src/login**            | Login Module which will have Login Model & Controller.Models define Mongoose schemas that will be used in storing and retrieving for Mongo and data from MongoDB                                                                     |             
+| **src/types**            | Holds .d.ts files not found on DefinitelyTyped. Covered more in this [section] (#type-definition-dts-files) |
+| **src/server.ts**          | Entry point to your Server Class app which will help to Execute Express as well as other config classes. |
+| **.env.example**         | API keys, tokens, passwords, database URI. Clone this, but don't check it in to public repos. |
+| **package.json**             | File that contains npm dependencies as well as [build scripts](#what-if-a-library-isnt-on-definitelytyped)  |
