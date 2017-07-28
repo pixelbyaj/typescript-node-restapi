@@ -20,6 +20,7 @@
     "url": "https://github.com/joshiabk/node-restapi"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
@@ -38,7 +39,8 @@
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "@types/async": "^2.0.40",
@@ -59,6 +61,7 @@
     "@types/passport-facebook": "^2.1.5",
     "@types/passport-local": "^1.0.30",
     "@types/request": "0.0.42",
+    "concurrently": "^3.5.0",
     "node-inspector": "^1.1.1"
   },
   "author": "abjo",

@@ -27,7 +27,7 @@ class LoginControl {
         if (errors) {
             console.log(errors);
             req.flash("errors", errors);
-            return res.redirect("/signup");
+            return res.send({ "status": "error", msg: errors })
         }
 
         const user = new User({
@@ -48,6 +48,7 @@ class LoginControl {
                         return next(err);
                     }
                     req.flash("success", { msg: "Success! You are logged in." });
+                    return res.send({ "status": "sucess", msg: "User Created" })
                 });
             });
         });
@@ -66,14 +67,14 @@ class LoginControl {
 
         if (errors) {
             req.flash("errors", errors);
-            return res.redirect("/login");
+            res.send({"returnUrl":errors});
         }
 
         passport.authenticate("local", (err: Error, user: UserModel, info: LocalStrategyInfo) => {
             if (err) { return next(err); }
             if (!user) {
                 req.flash("errors", info.message);
-                return res.redirect("/login");
+                res.send({"errors":info.message});
             }
             req.logIn(user, (err) => {
                 if (err) { return next(err); }
